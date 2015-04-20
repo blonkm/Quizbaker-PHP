@@ -43,9 +43,9 @@ Class Config {
 }
 
 if (!isLocal()) {
-    Config::$dbname = "rubiksc1_quizbaker";
-    Config::$dbuser = "rubiksc1_cube";
-    Config::$dbpassword = "P@ssw0rd";
+    Config::$dbname = "remote_server";
+    Config::$dbuser = "remote_user";
+    Config::$dbpassword = "password";
     Config::$dbserver = "127.0.0.1";
 }
 ?>
