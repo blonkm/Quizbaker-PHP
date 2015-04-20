@@ -1,0 +1,53 @@
+body { 
+    margin:2em auto; 
+	/* Note: This gradient may render differently in browsers that don't support the unprefixed gradient syntax */
+
+	/* IE10 Consumer Preview */ 
+	background-image: -ms-linear-gradient(top left, #FFFFFF 0%, #FFDDCC 100%);
+
+	/* Mozilla Firefox */ 
+	background-image: -moz-linear-gradient(top left, #FFFFFF 0%, #FFDDCC 100%);
+
+	/* Opera */ 
+	background-image: -o-linear-gradient(top left, #FFFFFF 0%, #FFDDCC 100%);
+
+	/* Webkit (Safari/Chrome 10) */ 
+	background-image: -webkit-gradient(linear, left top, right bottom, color-stop(0, #FFFFFF), color-stop(1, #FFDDCC));
+
+	/* Webkit (Chrome 11+) */ 
+	background-image: -webkit-linear-gradient(top left, #FFFFFF 0%, #FFDDCC 100%);
+
+	/* W3C Markup, IE10 Release Preview */ 
+	background-image: linear-gradient(to bottom right, #FFFFFF 0%, #FFDDCC 100%);
+}
+#main {
+	padding:2em;
+	font-size:2em;
+	margin:0 auto;
+	font: 2em Candara, helvetica, arial, sans-serif;
+}
+#main button, #main input {
+	font-family: 'IM Fell English SC', arial, serif;
+	border:1px solid #444;
+	-moz-box-shadow:1px 1px 4px #000;
+	-webkit-box-shadow:1px 1px 4px #000;
+	box-shadow:1px 1px 4px #000;
+	width:5em;
+	height:2em;
+	font-size:1em;
+	text-align:center;
+	background: white;
+}
+h1 {
+  font-family: 'IM Fell English SC', arial, serif;
+  font-size: 48px;
+  text-align:center;
+}
+
+a {
+	position:relative
+
+}
+#footer {
+	margin: 0 auto; text-align:center; font-family: monospace; font-size:10px; letter-spacing:1px; margin-top:1em; 
+}

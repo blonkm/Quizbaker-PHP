@@ -1,0 +1,325 @@
+<HTML>
+<HEAD>
+<!-- saved from url=(0014)about:internet -->
+<TITLE>Results</TITLE>
+
+<SCRIPT>
+var g_arrMonths = new Array()
+
+// Enter the month names below
+g_arrMonths[0] = "January"
+g_arrMonths[1] = "February"
+g_arrMonths[2] = "March"
+g_arrMonths[3] = "April"
+g_arrMonths[4] = "May"
+g_arrMonths[5] = "June"
+g_arrMonths[6] = "July"
+g_arrMonths[7] = "August"
+g_arrMonths[8] = "September"
+g_arrMonths[9] = "October"
+g_arrMonths[10] = "November"
+g_arrMonths[11] = "December"
+
+// Enter the column headers
+var g_strDateTime = "Date / Time"
+var g_strStudentScore = "Student Score"
+var g_strPassingScore = "Passing Score"
+var g_strResult1 = "Result"
+var g_strQuestion = "Question"
+var g_strCorrectAns = "Correct Answer"
+var g_strResult2 = "Result"
+var g_strStudentAns = "Student Answer"
+var g_strPointsAwarded = "Points Awarded"
+var g_strNeutral = "Neutral"
+var g_strCorrect = "Correct"
+var g_strIncorrect = "Incorrect"
+
+</SCRIPT>
+
+<STYLE>
+
+TD {
+	font-size:10pt;
+	font-family:arial;
+	text-align: center;
+	width: 12.5%;
+}
+
+.CORRECT {
+	font-size:10pt;
+	font-family:arial;
+	color: #008800;
+}
+
+.INCORRECT {
+	font-size:10pt;
+	font-family:arial;
+	color: #880000;
+}
+
+.NEUTRAL {
+	font-size:10pt;
+	font-family:arial;
+	color: #000088;
+}
+
+.QUESTION {
+	font-size:10pt;
+	font-family:arial;
+	text-align: left;
+	width: 46.25%;	
+}
+
+.NUMBER {
+	font-size:10pt;
+	font-family:arial;
+	text-align: center;
+	width: 3.75%;
+}
+
+.DATE {
+	font-size:10pt;
+	font-family:arial;
+	text-align: center;
+	
+}
+
+.DATETIME {
+	font-size:10pt;
+	font-family:arial;
+	margin-top: 0;
+	margin-bottom: 0;
+}
+
+.SUMMARY {
+	font-size:10pt;
+	font-family:arial;
+	text-align: center;
+}
+
+H1 {
+	font-size:14pt;
+	font-family:arial;
+	text-align: center;
+}
+
+H2 {
+	font-size:14pt;
+	font-family:arial;
+	text-align: center;
+}
+
+TH {
+	font-size:12pt;
+	font-family:arial;
+}
+
+</STYLE>
+
+<SCRIPT>
+var g_arrResults = window.opener.g_arrResults
+var g_oQuizResults = window.opener.g_oQuizResults;
+
+function AddItem(nIdx)
+{
+	var strResult = g_strIncorrect;
+	var strClass = "INCORRECT";
+	var strCorrectResponse = "&nbsp;";
+	var strStudentResponse = "&nbsp;";
+
+	if (g_arrResults[nIdx].strCorrectResponse)
+	{
+		strCorrectResponse = g_arrResults[nIdx].strCorrectResponse;
+		
+		strCorrectResponse = strCorrectResponse.replace(/\|#\|/g,",");
+	}
+
+	if (g_arrResults[nIdx].strStudentResponse)
+	{
+		strStudentResponse = g_arrResults[nIdx].strStudentResponse;
+		strStudentResponse = strStudentResponse.replace(/\|#\|/g,",");
+	}
+
+	document.write("<TR>");
+	document.write("<TD class='NUMBER'>" + g_arrResults[nIdx].nQuestionNum + "</TD>");
+	document.write("<TD class='QUESTION'>" + g_arrResults[nIdx].strQuestion + "</TD>");
+	document.write("<TD>" + strCorrectResponse + "</TD>");
+	document.write("<TD>" + strStudentResponse + "</TD>");
+
+	if (g_arrResults[nIdx].strResult == "correct")
+	{
+		strResult = g_strCorrect;
+		strClass = "CORRECT"
+	}
+	else if (g_arrResults[nIdx].strResult == "neutral")
+	{
+		strResult = g_strNeutral
+		strClass = "NEUTRAL"
+	}
+
+	document.write("<TD class='" + strClass + "'>" + strResult + "</TD>");
+	document.write("<TD>" + g_arrResults[nIdx].nPoints + "</TD>");
+	document.write("</TR>");
+}
+
+function FormatDate(dtmDate)
+{
+	var strResult = "";
+	var nHours = dtmDate.getHours();
+	var strAM = "am";
+	var nMinutes = dtmDate.getMinutes();
+	var strMinutes = "" + nMinutes;
+
+	if (nMinutes < 10)
+	{
+		strMinutes = "0" + nMinutes;
+	}
+
+	if (nHours == 12)
+	{
+		strAM = "pm";
+	}
+
+	if (nHours > 12)
+	{
+		nHours -= 12;
+		strAM = "pm";
+	}
+	
+
+	strResult += "<P class='DATETIME'>"
+	strResult += g_arrMonths[dtmDate.getMonth()] + " ";
+	strResult += dtmDate.getDate() + ", ";
+	strResult += dtmDate.getFullYear() + "  ";
+	strResult += "</P><P class='DATETIME'>"
+	strResult += nHours + ":";
+	strResult += strMinutes + " ";
+	strResult += strAM;
+	strResult += "</P>"
+	return strResult;
+}
+
+</SCRIPT>
+
+</HEAD>
+<BODY>
+
+<SCRIPT>
+var strTitle = g_oQuizResults.strTitle;
+document.write("<P><H1>" + strTitle + "</H1></P>");
+if (g_oQuizResults.oOptions.strName)
+{
+	if (g_oQuizResults.oOptions.strName.length > 0)
+	{
+		document.write("<P><H2>" + g_oQuizResults.oOptions.strName + "</H2></P>");
+	}
+}
+</SCRIPT>
+<P style='margin-bottom: 0;'>&nbsp;</P>
+
+<TABLE WIDTH='600' BORDER=1 align='center'>
+	<TR>
+<SCRIPT>
+	document.write("<TH>" + g_strDateTime + "</TH>");
+
+	if (g_oQuizResults.oOptions.bShowUserScore)
+	{	
+		document.write("<TH>" + g_strStudentScore + "</TH>");
+	}
+	if (g_oQuizResults.oOptions.bShowPassingScore)
+	{
+		document.write("<TH>" + g_strPassingScore + "</TH>");
+	}
+	if (g_oQuizResults.oOptions.bShowShowPassFail)
+	{
+		document.write("<TH>" + g_strResult1 + "</TH>");
+	}
+
+</SCRIPT>
+	</TR>
+	
+	<TR>
+<SCRIPT>
+	document.write("<TD class='DATE'>" + FormatDate(g_oQuizResults.dtmFinished) + "</TD>");
+
+	if (g_oQuizResults.oOptions.bShowUserScore)
+	{
+		document.write("<TD class='SUMMARY'>" + g_oQuizResults.strScore + "</TD>");
+	}
+	if (g_oQuizResults.oOptions.bShowPassingScore)
+	{
+		document.write("<TD class='SUMMARY'>" + g_oQuizResults.strPassingScore + "</TD>");
+	}
+	if (g_oQuizResults.oOptions.bShowShowPassFail)
+	{
+		var strCapResult = g_oQuizResults.oOptions.strResult;
+		strCapResult = strCapResult.substr(0,1).toUpperCase() + strCapResult.substr(1);
+		document.write("<TD class='SUMMARY'>" + strCapResult + "</TD>");
+	}
+</SCRIPT>
+	</TR>
+</TABLE>
+<P style='margin-top: 0;'>&nbsp;</P>
+
+<SCRIPT>
+	if (g_oQuizResults.oOptions.bShowQuizReview)
+	{
+
+		document.write("<TABLE WIDTH='100%' BORDER=1>");
+		document.write("<TR>");
+		document.write("<TH>#</TH>");
+		document.write("<TH>" + g_strQuestion + "</TH>");
+		document.write("<TH>" + g_strCorrectAns + "</TH>");
+		document.write("<TH>" + g_strStudentAns + "</TH>");
+		document.write("<TH>" + g_strResult2 + "</TH>");
+		document.write("<TH>" + g_strPointsAwarded + "</TH>");
+		document.write("</TR>");
+
+
+		// Sort our questions by question number
+		var arrSort = new Array();
+
+		if (g_arrResults.length > 0)
+		{
+			if (g_arrResults[0].bFound)
+			{
+				for (var i = 0; i < g_arrResults.length; i++)
+				{
+					g_arrResults[i].bFound = false;
+				}
+			}
+
+			for (var i = g_arrResults.length - 1; i >= 0; i--)
+			{
+				var nIndex = -1;
+				var nMaxValue = -1;
+		
+				for (var j = 0; j < g_arrResults.length; j++)
+				{
+					if (!g_arrResults[j].bFound && g_arrResults[j].nQuestionNum > nMaxValue)
+					{
+						nMaxValue = g_arrResults[j].nQuestionNum;
+						if (nIndex >= 0)
+						{
+							g_arrResults[nIndex].bFound = false;
+						}
+						g_arrResults[j].bFound = true;
+						nIndex = j;				
+					}
+				}
+				arrSort[i] = nIndex;
+			}
+
+			for (var i = 0; i < arrSort.length; i++)
+			{
+				AddItem(arrSort[i]);
+			}
+		}
+
+		document.write("</TABLE>");
+	}
+
+</SCRIPT>
+
+</BODY>
+</HTML>
